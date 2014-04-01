@@ -1,0 +1,33 @@
+CREATE TABLE Client
+(
+id INT IDENTITY PRIMARY KEY,
+firstname VARCHAR(40) NOT NULL,
+lastname VARCHAR(40)  NOT NULL,
+middlename VARCHAR(40)  NOT NULL
+)
+
+CREATE TABLE Phone
+(
+id INT IDENTITY PRIMARY KEY,
+phoneNumber VARCHAR(20) NOT NULL,
+phoneType INTEGER  NOT NULL,
+description VARCHAR(255) NULL,
+client_id INTEGER NOT NULL UNIQUE
+)
+
+CREATE TABLE PhoneType
+(
+type INT PRIMARY KEY,
+typeName VARCHAR(100) NOT NULL,
+remark VARCHAR(255) NULL
+)
+
+ALTER TABLE Phone
+ADD CONSTRAINT FK_Phone_Client 
+FOREIGN KEY (client_id) 
+REFERENCES Client(id);
+
+ALTER TABLE Phone
+ADD CONSTRAINT FK_Phone_PhoneType
+FOREIGN KEY (phoneType) 
+REFERENCES PhoneType(type);
